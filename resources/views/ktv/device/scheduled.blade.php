@@ -35,7 +35,7 @@
   </div><br>
   	<div class="form-group">
     <label for="exampleInputEmail1">Hoạt động bảo dưỡng</label>
-    <input style="width: 90%" type="text" name="nameAct" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập hoạt động cần bảo dưỡng">
+    <input style="width: 90%" type="text" name="nameAct" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập hoạt động cần bảo dưỡng" required="">
     <small id="emailHelp" class="form-text text-muted">VD: Kiểm tra buồng kính chiếu tia X</small>
   	</div>
   	<div class="form-group">
@@ -60,9 +60,9 @@
       <div style="float: left;margin-left: 10px;"><a class="btn btn-primary" href="{{route('device.schedule')}}">Hoàn tất</a></div>
     </div>
 	</form>
-<br><br>
+<br><br><br><br>
 	<div style="margin-left: 50px;">
-	<table class="table table-condensed table-bordered table-hover ">
+	<table class="table table-condensed table-bordered table-hover" width="90%">
 		<thead>
       <th>ID</th>
 			<th>Hạng mục công việc</th>
@@ -74,11 +74,14 @@
       @if(isset($schedules))
 			@foreach($schedules as $row)
 			<tr>
-        <td>{{$row->id}}</td>
+        <td>{{$row->act_id}}</td>
 				<td>{{$row->scheduleAct}}</td>
 				<td>{{$row->scheduleTime}}</td>
 				<td>{{$row->note}}</td>
-				<td></td>
+				<td>
+            <a href="{{route('device.getEditAct',['id'=>$row->id])}}"><i class="fa fa-pencil-square-o " title="Sửa" style="font-size: 18px" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+           <a onclick="return confirm('Bạn có chắc chắn xóa?')" href="{{route('device.delScheduleAct',['id'=>$row->id] )}}" ><i class="fa fa-trash" title="Xóa" aria-hidden="true" style="font-size: 18px"></i></a>    
+        </td>
 			</tr>
 			@endforeach
       @endif
@@ -87,6 +90,7 @@
 	</table>
 </div>
 </div>
+
 @endsection
 
 

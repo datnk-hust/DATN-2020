@@ -6,15 +6,15 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"/>
- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"/> 
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css"/>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"/>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"/> 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 
 
@@ -103,29 +103,8 @@
                 </button>
                 <a class="navbar-brand" href="{{route('get.home')}}">Trang chủ</a>
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a  class="dropdown-toggle" data-toggle="dropdown">QL Nhà Cung Cấp</a>
-                        <ul class="dropdown-menu multi-level">
-                            <li><a href="{{route('show.provider')}}">Danh sách NCC</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{{route('provider.add')}}">Thêm nhà CC</a></li>
-                        </ul></li>
-                    </ul>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->fullname }} <b class="caret"></b></a>
-                         <ul class="dropdown-menu multi-level">
-                            <li><a href="{{ route('getEdit.ktv', ['id' => Auth::id()]) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            Cập nhật thông tin</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{{ route('getPsw.ktv',['id' => Auth::id()]) }}"><i class="fa fa-key" aria-hidden="true"></i>
-                            Đổi mật khẩu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{{route('get.logout')}}"><i class="fa fa-power-off" aria-hidden="true"></i>
-                            Đăng xuất</a></li>
-                        </ul></li><!--<b class="caret"></b>-->
-                    </ul>
-                    <ul class="nav navbar-nav">
+                   
+
                         <li ><a class="dropdown-toggle" data-toggle="dropdown" style="background-color: #00BD9C">QL Thiết Bị Y Tế</a>
                           <ul class="dropdown-menu multi-level">
                             <li class="dropdown-submenu">
@@ -157,6 +136,38 @@
                             
                         </ul>
                     </li>
+                </ul>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->fullname }} <b class="caret"></b></a>
+                           <ul class="dropdown-menu multi-level">
+                            <li><a href="{{ route('getEdit.ktv', ['id' => Auth::id()]) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            Cập nhật thông tin</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ route('getPsw.ktv',['id' => Auth::id()]) }}"><i class="fa fa-key" aria-hidden="true"></i>
+                            Đổi mật khẩu</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{route('get.logout')}}"><i class="fa fa-power-off" aria-hidden="true"></i>
+                            Đăng xuất</a></li>
+                        </ul></li><!--<b class="caret"></b>-->
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">QL Vật Tư</b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{route('accessory.show')}}">Danh sách vật tư</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{route('accessory.add')}}">Thêm mới vật tư</a></li>
+                        </ul>
+                    </li> 
+                        <li><a  class="dropdown-toggle" data-toggle="dropdown">QL Nhà Cung Cấp</a>
+                        <ul class="dropdown-menu multi-level">
+                            <li><a href="{{route('show.provider')}}">Danh sách NCC</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{route('provider.add')}}">Thêm nhà CC</a></li>
+                        </ul></li>
+
                     <li>
                         <a class="dropdown-toggle" data-toggle="dropdown">QL Loại Thiết Bị </a>
                         <ul class="dropdown-menu multi-level">
@@ -165,14 +176,7 @@
                             <li><a href="{{route('dvtype.getAdd')}}">Thêm mới loại TB</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">QL Vật Tư</b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{route('accessory.show')}}">Danh sách vật tư</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{{route('accessory.add')}}">Thêm mới vật tư</a></li>
-                        </ul>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -180,21 +184,21 @@
     <br>
     <div class="container1" style="padding-top: 5px;">
         <div style="width: 500px; padding-left:10px; ">
-        @if ($errors->any())
+            @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
                 </ul>
             </div>
-        @endif
-        @if (session('message'))
-             <div class="alert alert-success">
-                 {{ session('message') }}
-            </div> 
-        @endif
-        </div>
-        @yield('content')
-    </div>
+            @endif
+            @if (session('message'))
+            <div class="alert alert-success">
+               {{ session('message') }}
+           </div> 
+           @endif
+       </div>
+       @yield('content')
+   </div>
 </body>

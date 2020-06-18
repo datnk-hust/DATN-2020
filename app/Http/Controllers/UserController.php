@@ -544,6 +544,7 @@ public function saveAcc(Request $request, $id){
     $dv_acc->dv_id = $id;
     $dv_acc->acc_id = $acc->id;
     $dv_acc->amount = $request->accNumber;
+    $dv_acc->status = 1;
     $dv_acc->save();
     return redirect()->route('device.getAcc',['id'=>$dv->id])->with(['message'=>'Đã lưu vật tư kèm theo.']);
 
@@ -868,6 +869,43 @@ public function delAcc($id){
 
 }
 
+public function selectDevice(Request $request, $id){
+    // $dvt = DB::table('device_type')
+    $accDev = DB::table('device_accessory')->where('acc_id',$id)->get();
+    $dev = [];
+    if($request->dvId){
+        $dev = DB::table('device')->where('dv_type_id','like', '%'.$request->dvt.'%')->get();
+    }
+    if($request->dvt){
+        $dev = DB::table('device')->where('dv_type_id','=', $request->dvt)->get();
+    }
+    if($request->model){
+        $dev = DB::table('device')->where('dv_model','=', $request->model)->get();
+    }
+    if($request->serial){
+        $dev = DB::table('device')->where('dv_serial','=', $request->serial)->get();
+    }
+    if($request->dept){
+        $dev = DB::table('device')->where('department_id','=', $request->dept)->get();
+    }
+
+    return view('ktv.accessory.slDevice')->with(['devices'=>$dev,'id'=>$id, 'accDevices'=>$accDev]);
+}
+
+public function postSelectDevice(Request $request, $id){
+    $sl = $request->selected;
+    foreach ($sl as $r) {
+        $dvAcc = new Device_accessory;
+        $dvAcc->acc_id = $id;
+        $dvAcc->dv_id = (int)$r;
+        $dvAcc->status = 0;
+        $dvAcc->save();
+    }
+    return redirect()->route('accessory.show')->with('message','Đã lưu thông tin vật tư và thiết bị có thể tương thích.');
+    
+
+}
+
 //xem hồ sơ thiết bị
 public function fileDevice($id){
     $device = Device::find($id);
@@ -913,9 +951,12 @@ public function showmaintain(Request $request){
         $schedule = DB::table('schedule_action')->where('dv_id',$id)->get();
         return view('ktv.device.scheduled')->with(['device'=>$dv,'schedules'=>$schedule]);
     }
+
     public function postScheduleAct(Request $request){
         $id = $request->sl_dv;
+        $act = DB::table('schedule_action')->where('dv_id',$id)->get();
         $schedules = new ScheduleAction;
+        $schedules->act_id = count($act) +1;
         $schedules->dv_id = $request->sl_dv;
         $schedules->scheduleAct = $request->nameAct;
         $schedules->scheduleTime = $request->timeAct;
@@ -925,6 +966,25 @@ public function showmaintain(Request $request){
         return redirect()->route('device.scheduled',['id'=>$id]);
     }
 
+    public function getEditAct($id){
+        $act = ScheduleAction::find($id);
+        return view('ktv.device.editAction')->with(['act'=>$act]);
+    }
+    public function postEditAct(Request $request, $id){
+        $act = ScheduleAction::find($id);
+        $id = $act->dv_id;
+        if($request->actName){
+            $act->scheduleAct = $request->actName;
+        }
+        if($request->fq){
+            $act->scheduleTime = $request->fq;
+        }
+        if ($request->note) {
+            $act->note = $request->note;
+        }
+        $act->save();
+        return redirect()->route('device.scheduled',['id'=>$id]);
+    }
     public function delScheduleAct($id){
         $sch = ScheduleAction::findOrFail($id);
         $id = $sch->dv_id;

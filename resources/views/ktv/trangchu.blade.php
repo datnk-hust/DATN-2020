@@ -37,8 +37,8 @@
   }
 </style>
 
-<div style="margin-left: 50px;font-size: 15px;font-weight: bold;">Chào mừng đến với hệ thống quản lý trang thiết bị y tế BME-HUST</div>
-<div style="margin-left: 50px;font-size: 15px;font-weight: bold;">Bạn đang có <span style="font-size: 35px; color: red;">{{$notices->total()}}</span> thông báo</div>
+<div style="margin-left: 100px;font-size: 17px;font-weight: bold;">Chào mừng đến với hệ thống quản lý trang thiết bị y tế BME-HUST</div>
+<div style="margin-left: 100px;font-size: 17px;font-weight: bold;">Bạn đang có <span style="font-size: 35px; color: red;">{{$notices->total()}}</span> thông báo!</div>
  
 
 <div class="container2">

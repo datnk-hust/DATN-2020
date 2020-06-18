@@ -121,12 +121,12 @@
     @if(isset($maintainAct))
     @foreach($maintainAct as $row)
 			<tr>
-				<td class="bod" style="text-align: left;"><b>{{ $row -> scheduleAct}}</b></td>
+				<td class="bod" style="text-align: left;"><b>{{ $row->scheduleAct}}</b></td>
 				@for($i = 1; $i<=30; $i++)
-				<td  style="text-align: center; width: 1.5%;cursor: pointer;border: 1px solid black" class="check" data-deviceid="{{ $row->id.$i }}" id="{{ $row->id.$i }}">
+				<td  style="text-align: center; width: 1.5%;cursor: pointer;border: 1px solid black" class="check" data-deviceid="{{ $row->act_id.$i }}" id="{{ $row->act_id.$i }}">
           @if($checked != null) 
             @foreach($checked as $ch)
-                @if( $ch->check_id == $row->id.$i.$ms.$ys )
+                @if( $ch->check_id == $row->act_id.$i.$ms.$ys.$device->id )
                     @if($ch->type_check == 'C') 
                     <button data-deviceid="{{ $ch->check_id }}" class="editcheck" style="height: 20px;font-size: 9px;background-color: green">{{$ch->type_check}} </button>
                     @elseif($ch->type_check == 'M')
@@ -157,10 +157,10 @@
       <tr>
         <td class="bod" style="text-align: left;"><b>{{ $row -> scheduleAct}}</b></td>
         @for($i = 1; $i<=31; $i++)
-        <td style="text-align: center; width: 1.5%;cursor: pointer; border: 1px solid black" class="check" data-deviceid="{{ $row->id.$i }}" id="{{ $row->id.$i}}">
+        <td style="text-align: center; width: 1.5%;cursor: pointer; border: 1px solid black" class="check" data-deviceid="{{ $row->act_id.$i }}" id="{{ $row->act_id.$i}}">
           @if($checked != null) 
             @foreach($checked as $ch)
-                @if( $ch->check_id == $row->id.$i.$ms.$ys )
+                @if( $ch->check_id == $row->act_id.$i.$ms.$ys.$device->id )
                     @if($ch->type_check == 'C') 
                     <button data-deviceid="{{ $ch->check_id }}" class="editcheck" style="height: 20px;font-size: 9px;background-color: green">{{$ch->type_check}} </button>
                     @elseif($ch->type_check == 'M')
@@ -191,10 +191,10 @@
       <tr>
         <td class="bod" style="text-align: left;"><b>{{ $row -> scheduleAct}}</b></td>
         @for($i = 1; $i<=28; $i++)
-        <td  style="text-align: center; width: 1.5%;cursor: pointer;border: 1px solid black" class="check" data-deviceid="{{ $row->id.$i }}" id="{{ $row->id.$i }}">
+        <td  style="text-align: center; width: 1.5%;cursor: pointer;border: 1px solid black" class="check" data-deviceid="{{ $row->act_id.$i }}" id="{{ $row->act_id.$i }}">
           @if($checked != null) 
             @foreach($checked as $ch)
-                @if( $ch->check_id == $row->id.$i.$ms.$ys )
+                @if( $ch->check_id == $row->act_id.$i.$ms.$ys.$device->id )
                     @if($ch->type_check == 'C') 
                     <button data-deviceid="{{ $ch->check_id }}" class="editcheck" style="height: 20px;font-size: 9px;background-color: green">{{$ch->type_check}} </button>
                     @elseif($ch->type_check == 'M')
@@ -314,6 +314,7 @@
 <script type="text/javascript">
   var y = '{{ $ys }}';
   var m = '{{ $ms }}'; 
+  var dv_id = '{{ $device->id}}';
   function closeForm() {
         document.getElementById("myForm").style.display = "none";
         document.getElementById("myForm1").style.display = "none";
@@ -359,7 +360,7 @@
     var actions= $('.form1').attr('action', action.replace('id',id));
     // Hiện form
     document.getElementById("myForm").style.display = "block";
-    document.getElementById('id_check').value = id+m+y;
+    document.getElementById('id_check').value = id+m+y+dv_id;
   });
 
 //editcheck

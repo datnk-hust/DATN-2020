@@ -17,7 +17,7 @@
   	margin-left: 40px;
   	font-size: 20px;
   }
-  .fa-trash:hover{
+  .fa-frash:hover{
     background-color: red;
   }
 </style>
@@ -29,7 +29,7 @@
  	<form class="form" action="{{ route('device.postScheduleAct')}}" method="post">
  		@csrf
  		<div >
- 		<select name="sl_dv" id="searchDv" class="form-control" style="width: 90%;"  >
+ 		<select name="sl_dv" id="searchDv" class="form-control" style="width: 90%;" required="" >
  			<option disabled="" value="">Lựa chọn thiết bị cần tạo lịch</option>
  			@if(isset($devices))
  			@foreach($devices as $row)
@@ -42,7 +42,7 @@
   <br>
   	<div>
     <label >Hoạt động bảo dưỡng</label>
-    <input style="width: 90%" type="text" name="nameAct" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập hoạt động cần bảo dưỡng">
+    <input style="width: 90%" type="text" name="nameAct" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  placeholder="Nhập hoạt động cần bảo dưỡng" required="">
     <small id="emailHelp" class="form-text text-muted">VD: Kiểm tra buồng kính chiếu tia X</small>
   	</div>
   	<div class="form-group">
@@ -68,25 +68,25 @@
   	</div>
   		
 	</form>
-<br><br>
-	<div style="margin-left: 50px; width: 95%">
-	<table class="table table-condensed table-bordered table-hover ">
+<br><br><br><br>
+	<div style="margin-left: 50px;width: 90%">
+	<table class="table table-condensed table-bordered table-hover" width="80%">
 		<thead>
+      <th>ID</th>
 			<th>Hạng mục công việc</th>
 			<th>Tần suất bảo dưỡng</th>
 			<th>Ghi chú</th>
-			<th width="10%"></th>
+			
 		</thead>
 		@if(isset($schedules))
 		<tbody>
 			@foreach($schedules as $row)
 			<tr>
+        <td>{{$row->act_id}}</td>
 				<td>$row->scheduleAct</td>
 				<td>$row->scheduleTime</td>
 				<td>$row->note</td>
-				<td>
-					<a href="{{route('device.delScheduleAct',['id'=>$row->id] )}}" onclick="return confirm('Bạn có chắc chắn xóa?')" ><i class="fa fa-trash" title="Xóa" aria-hidden="true"></i></a>
-				</td>
+				
 			</tr>
 			@endforeach
 		</tbody>

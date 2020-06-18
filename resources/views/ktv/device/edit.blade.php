@@ -301,7 +301,11 @@ label {
         <td>
             {{\App\Accessory::where(['id' =>$acc->acc_id])->pluck('type')->first() }}
         </td>
-        <td>{{\App\Accessory::where(['id' =>$acc->acc_id])->pluck('note')->first() }}</td>
+        @if($acc->status == 0)
+        <td>Vật tư có thể được sử dụng cho thiết bị</td>
+        @else
+        <td>Vật tư kèm theo thiết bị</td>
+        @endif
       </tr>
       @endforeach
       @endif

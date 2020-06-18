@@ -86,6 +86,8 @@ Route::group(['prefix'=>'ktv'],function(){
 		Route::post('device/check/{id}','UserController@checked')->name('device.check');
 		Route::post('device/edit/check/{id}','UserController@editCheck')->name('device.editcheck');
 		Route::get('device/check/detail','UserController@detailCheck')->name('device.detailCheck');
+		Route::get('device/edit/actSchedule/{id}','UserController@getEditAct')->name('device.getEditAct');
+		Route::post('device/post/edit/act/{id}','UserController@postEditAct')->name('postEditAct.ktv');
 		//device_type
 		Route::get('device_type/list','UserController@showDvType')->name('dvtype.show');
 		Route::get('device_type/add','UserController@getAddDvType')->name('dvtype.getAdd');
@@ -103,6 +105,8 @@ Route::group(['prefix'=>'ktv'],function(){
 		Route::get('accessory/delete/{id}','UserController@delACC')->name('accessory.del');
 		Route::post('accessory/plus/{id}/{user_id}','UserController@plusAcc')->name('accessory.plus');
 		Route::get('accessory/mark/device/{id}','UserController@markDevice')->name('acc.markDevice');
+		Route::get('accessory/select/device/{id}','UserController@selectDevice')->name('acc.selectDevice');
+		Route::post('accessory/post/selected/{id}','UserController@postSelectDevice')->name('acc.postSelectDev');
 
 	});
 	Route::group(['prefix'=>'doctor'],function(){

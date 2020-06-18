@@ -15,6 +15,7 @@ class CreateScheduleActionTable extends Migration
     {
         Schema::create('schedule_action', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('act_id')->nullable();
             $table->string('dv_id')->nullable();
             $table->string('scheduleAct')->nullable();
             $table->string('scheduleTime')->nullable();

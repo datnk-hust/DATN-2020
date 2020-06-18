@@ -132,7 +132,7 @@
         <th>Nhà cung cấp</th>
         <th>Số lượng</th>
         <th>Đơn vị tính</th>
-        <th>Đã sử dụng</th>
+        <th>Năm sản xuất</th>
         <th>Ngày nhập kho</th>
         <th width="10%">Điều khiển</th>
       </tr>
@@ -145,10 +145,11 @@
         <td>{{ \App\Provider::where(['id' => $acc->provider_id])->pluck('provider_name')->first() }}</td>
         <td>{{ $acc->amount }}</td>
         <td>{{ $acc->unit }}</td>
-        <td>{{ $acc->used }}</td>
+        <td>{{ $acc->produce_date }}</td>
         <td>{{ $acc->import_date }}</td>
         <td style="text-align: center;">
-           <a class="ban_giao" data-deviceid="{{$acc->id}}"><i class="fa fa-share " title="Bàn giao cho thiết bị" style="font-size: 20px" aria-hidden="true"></i></a>&nbsp;&nbsp;
+          <a href="{{ route('acc.selectDevice',['id'=>$acc->id]) }}"><i class="fa fa-share " title="Thiết bị tương thích" style="font-size: 20px" aria-hidden="true"></i></a>
+          &nbsp;&nbsp;
           <a href="{{route('accessory.getEdit',['id'=>$acc->id])}}"><i class="fa fa-pencil-square-o " title="Sửa" style="font-size: 20px" aria-hidden="true"></i></a>&nbsp;&nbsp;
           <a class="add" data-deviceid="{{$acc->id}}"><i class="fa fa-plus " style="font-size: 20px;cursor: pointer;" title="Thêm số lượng" aria-hidden="true"></i></a>
           
@@ -163,43 +164,8 @@
     </nav>
   </div>
 </div>
-<!-- form cập nhật tình trạng sửa chữa -->
-<div class="form-popup" id="myForm">
-    <form action="{{route('device.accessory','id')}}" class="form-container form" method="post">
-      @csrf
-      <table>
-        <tr>
-          <td colspan="2"><label for="email" style="text-align: center; font-size: 20px;"><b>Chọn thiết bị cần bàn giao vật tư</b></label></td>
-        </tr>
-        <tr><td colspan="2"><hr style="height: 3px;background-color: green;"></td></tr>
-        <tr>
-          <td colspan="2">
-            <select type="text" id="searchDv" name="dv_id" style="height: 50px;width: 100%" class="form-control" required>
-              <option  value="" >Chọn thiết bị</option>
-              @if(isset($devs))
-              @foreach($devs as $row)
-              <option  value="{{$row->id}}">{{ $row->dv_model }}--{{ $row->dv_serial }}--{{ $row->dv_name }}</option>
-              @endforeach
-              @endif
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2"><div style="margin-left: 10px;"><span style="font-size: 20px;font-weight: bold;">Số lượng</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <input type="text" name="amount" style="width: 300px;height: 40px;margin-left: 45px;" required></div></td>
-        </tr>
-        <tr>
-          <td colspan="2"><div style="margin-left: 10px;"><span style="font-size: 20px;font-weight: bold;">Ngày bàn giao</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <input type="date"  name="export_date" style="width: 300px;height: 40px;border-radius: 5px;" required></div></td>
-        </tr>
-        <tr>
-          <td colspan="2"><div style="padding: 10px;margin-left: 50px;"><button type="submit" class="btn" onclick="return confirm('Bạn có chắc chắn bàn giao vật tư này cho thiết bị?')">Lưu
-          </button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Hủy</button></div></td>
-        </tr>
-      </table>
-    </form>
-  </div>
+<!-- form bàn giao vật tư -->
+
   <!-- form nhập thêm số lượng vật tư -->
  <div class="form-popup" id="myForm1">
     <form action="{{route('accessory.plus',['id','user_id'=>Auth::id()])}}" class="form-container form1" method="post">
@@ -233,17 +199,6 @@
         document.getElementById("myForm").style.display = "none";
         document.getElementById("myForm1").style.display = "none";
   }
-  //bàn giao vật tư
-  $(document).on('click', '.ban_giao', function(){
-    // Lấy id của data
-    var id = $(this).attr('data-deviceid');
-    // Lấy action hiện tại của form theo class
-    var action = $('.form').attr('action');
-    // Thay thế id data vào đoạn action của form
-    var actions= $('.form').attr('action', action.replace('id',id));
-    // Hiện form
-    document.getElementById("myForm").style.display = "block";
-  });
 //nhập thêm số lượng
   $(document).on('click', '.add', function(){
     // Lấy id của data
